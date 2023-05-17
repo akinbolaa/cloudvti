@@ -1,0 +1,14 @@
+---
+# cloud demarc routers vp03 and vp04 config generation
+  - hosts: dc11_sw01
+    connection: local
+    tasks:
+#      - name: Generate config for cloud routers
+#        template:
+#          src: "templates/cloud_rtr.j2"
+#          dest: "configs/{{ inventory_hostname }}.cfg"
+
+    - name: Generate switch config template
+      template:
+        src: "templates/colo_sw.j2"
+        dest: "configs/colo_sw/{{ inventory_hostname }}.cfg"

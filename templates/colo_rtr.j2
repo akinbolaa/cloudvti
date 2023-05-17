@@ -1,0 +1,94 @@
+---
+hostname {{ hostname }}
+
+interface loopback0
+description loopback for default vrf and bgp router-id 
+ip address {{ loopback0 }} 255.255.255.255
+
+{# create vrf definition for each vrf #}
+{% for vrf_name, vrf_value in vrf_definition.items() %}
+vrf definition {{ vrf_value.vrf_name }}
+rd {{ local_bgp_asn}}:{{ vrf_value.vrf_dot1q }}
+!
+address-family ipv4 
+!
+{% endfor %}
+{# create l3 interfaces #}
+{% for l3_int_name, l3_int_value in l3_interfaces.items() %}
+interface {{ l3_int_name }}
+no shut
+description {{ l3_int_value.description }}
+!
+{% endfor %}
+
+{% for loop_int_name, loop_value in loopback_interfaces.items() %}
+interface {{ loop_int_name }}
+description {{ loop_value.loop_description }}
+vrf forwarding {{ loop_value.loop_vrf }}
+ip address {{ loop_value.loop_ipv4 }} 255.255.255.255
+!
+{% endfor %}
+{% for l3_int_name, l3_int_value in layer3_sub_int.items() %}
+interface {{ l3_int_name }}
+description {{ l3_int_value.description }}
+encapsulation dot1q {{ l3_int_value.dot1q }}
+vrf forwarding {{ l3_int_value.vrf }}
+ip address {{ l3_int_value.ipv4_add }} 255.255.255.252
+!
+{% endfor %}
+{# router bgp definition #}
+router bgp {{ local_bgp_asn }}
+no bgp default ipv4-unicast
+bgp router-id {{ loopback0 }}
+!
+address-family ipv4 unicast vrf AZCP21
+{% for l_name, l_value in loopback_interfaces.items() %}
+{% if l_value.loop_vrf == "AZCP21" %}
+{{ l_value.loop_ipv4 }} mask 255.255.255.255
+{% endif %}
+{% endfor %}
+{% for bgp_peer, bgp_data in bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCP21" %}
+neighbor {{ bgp_data.remote_ipv4 }} remote-as {{ bgp_data.remote_asn }}
+neighbor {{ bgp_data.remote_ipv4 }} activate
+{% if bgp_data.bgp_type == "ibgp" %}
+neighbor {{ bgp_data.remote_ipv4 }} next-hop-self
+{% endif %}
+{% endif %}
+{% endfor %}
+exit-address-family
+!
+address-family ipv4 unicast vrf AZCQ21
+{% for l_name, l_value in loopback_interfaces.items() %}
+{% if l_value.loop_vrf == "AZCQ21" %}
+{{ l_value.loop_ipv4 }} mask 255.255.255.255
+{% endif %}
+{% endfor %}
+{% for bgp_peer, bgp_data in bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCQ21" %}
+neighbor {{ bgp_data.remote_ipv4 }} remote-as {{ bgp_data.remote_asn }}
+neighbor {{ bgp_data.remote_ipv4 }} activate
+{% if bgp_data.bgp_type == "ibgp" %}
+neighbor {{ bgp_data.remote_ipv4 }} next-hop-self
+{% endif %}
+{% endif %}
+{% endfor %}
+exit-address-family
+!
+address-family ipv4 unicast vrf AZCD21
+{% for l_name, l_value in loopback_interfaces.items() %}
+{% if l_value.loop_vrf == "AZCD21" %}
+{{ l_value.loop_ipv4 }} mask 255.255.255.255
+{% endif %}
+{% endfor %}
+{% for bgp_peer, bgp_data in bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCD21" %}
+neighbor {{ bgp_data.remote_ipv4 }} remote-as {{ bgp_data.remote_asn }}
+neighbor {{ bgp_data.remote_ipv4 }} activate
+{% if bgp_data.bgp_type == "ibgp" %}
+neighbor {{ bgp_data.remote_ipv4 }} next-hop-self
+{% endif %}
+{% endif %}
+{% endfor %}
+exit-address-family
+!

@@ -1,0 +1,213 @@
+---
+feature bgp
+feature lacp
+feature interface-vlan
+feature vpc
+feature ssh
+
+{# loopback0 interface for default vrf #}
+interface loopback0
+description default vrf loopback
+ip address {{ loopback0 }}
+!
+
+{# create vrf for vpc_keepalive #}
+vrf context vpc_keepalive
+!
+{# vrf creation #}
+{% for vrf_name, vrf_data in vlan_interfaces.items()  %}
+{# vlan creation for ibgp for all vrf #}
+vlan {{ vrf_data.vlan_id }}
+  name {{ vrf_data.vrf }}
+  !
+{# create vrf contexts #}
+vrf context {{ vrf_data.vrf }}
+  description {{ vrf_data.vlan_description }}
+  rd {{ local_bgp_asn }}:{{ vrf_data.vlan_id }}
+  address-family ipv4 unicast
+  !
+{# ceeate layer 3 vlan interfaces #}
+interface vlan {{ vrf_data.vlan_id }}
+  description {{ vrf_data.vlan_description }}
+  no shutdown
+  vrf member {{ vrf_data.vrf }}
+  ip address {{vrf_data.vlan_ipv4 }}
+  !
+{% endfor %}
+!
+{# create loopback interfaces for each vrf and the default #}
+{% for vrf_loop_name, vrf_loop_data in loopback_interfaces.items() %}
+interface {{ vrf_loop_name }}
+  description {{ vrf_loop_data.loop_description }}
+  vrf member {{ vrf_loop_data.loop_vrf }}
+  ip address {{ vrf_loop_data.loop_ipv4 }}
+!
+{% endfor %}
+{# create interface for portchannel 1 - vpc peer #}
+!
+{% for vpc_link, vpc_data in vpc_interfaces.items() %}
+interface ethernet{{ vpc_data.vpc_int_id }}
+ no shutdown
+ switchport mode trunk
+ channel-group {{ vpc_data.vpc_portchannel_id }} mode active
+!
+{% endfor %}
+interface port-channel1
+ no shutdown
+ switchport mode trunk
+ vpc peer-link
+!
+{# interface for vpc peer keepalive #}
+interface ethernet1/3
+no shutdown
+no switchport
+vrf member vpc_keepalive
+ip add {{ local_vpc_peer_ipv4 }}/30
+
+vpc domain 100
+ peer-keepalive destination {{ remote_vpc_peer_ipv4 }} source {{ local_vpc_peer_ipv4 }} vrf vpc_keepalive
+!
+{# enable l3 interfaces used for connectioning to other devices #}
+{% for l3_int_value, l3_int_data in l3_interfaces.items() %}
+interface {{ l3_int_value }}
+  no shutdown
+  no switchport
+!
+{% endfor %}
+{# create l3 sub-interfaces #}
+{% for l3_sub_int_value, l3_sub_int_data in l3_sub_interfaces.items() %}
+interface {{ l3_sub_int_value }}
+  no shutdown
+  encapsulation dot1q {{ l3_sub_int_data.l3_sub_int_dot1q }}
+  vrf member {{ l3_sub_int_data.l3_sub_int_vrf }}
+  ip address {{ l3_sub_int_data.l3_sub_int_ipv4 }}
+!
+{% endfor %} 
+{# generate route-map for redistribution#}
+route-map REDIS_CONNECTED-VRF-AZCT21-OUT permit 10
+{% for redis_name, int_name in redis_connected.items() %}
+{% if int_name.vrf == "AZCD21-OUT" %} match interface {{ redis_name }}
+{% endif %}
+{% endfor %}
+route-map REDIS_CONNECTED-VRF-AZCT21-OUT permit 10
+{% for redis_name, int_name in redis_connected.items() %}
+{% if int_name.vrf == "AZCQ21-OUT" %} match interface {{ redis_name }}
+{% endif %}
+{% endfor %}
+route-map REDIS_CONNECTED-VRF-AZCT21-OUT permit 10
+{% for redis_name, int_name in redis_connected.items() %}
+{% if int_name.vrf == "AZCP21-OUT" %} match interface {{ redis_name }}
+{% endif %}
+{% endfor %}
+{# bgp definition #}
+router bgp {{ local_bgp_asn }}
+  address-family ipv4 unicast
+  vrf AZCP21
+  address-family ipv4 unicast
+{# add network statement for loopback interfaces #}
+{% for loop_int, loop_data in loopback_interfaces.items() %}
+{% if loop_data.loop_vrf == "AZCP21" %}
+network {{ loop_data.loop_ipv4 }}
+{% endif %}
+{% endfor %}
+{% for bgp_vlaue, bgp_data in l3_bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCP21" %}
+    neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
+    remote-as {{ bgp_data.remote_asn }}
+    address-family ipv4 unicast
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
+    {% endif %}
+{% endif %}
+{% endfor %}
+!
+  vrf AZCD21
+  address-family ipv4 unicast
+  {# add network statement for loopback interfaces #}
+{% for loop_int, loop_data in loopback_interfaces.items() %}
+{% if loop_data.loop_vrf == "AZCD21" %}
+network {{ loop_data.loop_ipv4 }}
+{% endif %}
+{% endfor %}
+{% for bgp_vlaue, bgp_data in l3_bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCD21" %}
+    neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
+    remote-as {{ bgp_data.remote_asn }}
+    address-family ipv4 unicast
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
+    {% endif %}
+{% endif %}
+{% endfor %}
+!
+vrf AZCQ21
+address-family ipv4 unicast
+{# add network statement for loopback interfaces #}
+{% for loop_int, loop_data in loopback_interfaces.items() %}
+{% if loop_data.loop_vrf == "AZCQ21" %}
+network {{ loop_data.loop_ipv4 }}
+{% endif %}
+{% endfor %}
+{% for bgp_vlaue, bgp_data in l3_bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCQ21" %}
+    neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
+    remote-as {{ bgp_data.remote_asn }}
+    address-family ipv4 unicast
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
+    {% endif %}
+{% endif %}
+{% endfor %}
+!
+vrf AZCD21-OUT
+address-family ipv4 unicast
+redistribute direct route-map REDIS_CONNECTED-VRF-AZCD21-OUT
+{# add network statement for loopback interfaces #}
+{% for loop_int, loop_data in loopback_interfaces.items() %}
+{% if loop_data.loop_vrf == "AZCD21-OUT" %} network {{ loop_data.loop_ipv4 }}
+{% endif %}
+{% endfor %}
+{% for bgp_vlaue, bgp_data in l3_bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCD21-OUT" %}
+    neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
+    remote-as {{ bgp_data.remote_asn }}
+    address-family ipv4 unicast
+{% if bgp_data.bgp_type == "ibgp" %} next-hop-self
+{% endif %}  
+{% endif %}
+{% endfor %}
+!
+vrf AZCQ21-OUT
+address-family ipv4 unicast
+redistribute direct route-map REDIS_CONNECTED-VRF-AZCQ21-OUT
+{# add network statement for loopback interfaces #}
+{% for loop_int, loop_data in loopback_interfaces.items() %}
+{% if loop_data.loop_vrf == "AZCQ21-OUT" %}
+network {{ loop_data.loop_ipv4 }}
+{% endif %}
+{% endfor %}
+{% for bgp_vlaue, bgp_data in l3_bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCQ21-OUT" %}
+    neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
+    remote-as {{ bgp_data.remote_asn }}
+    address-family ipv4 unicast
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
+    {% endif %}
+{% endif %}
+{% endfor %}
+!
+vrf AZCP21-OUT
+address-family ipv4 unicast
+redistribute direct route-map REDIS_CONNECTED-VRF-AZCP21-OUT
+{# add network statement for loopback interfaces #}
+{% for loop_int, loop_data in loopback_interfaces.items() %}
+{% if loop_data.loop_vrf == "AZCP21-OUT" %}
+network {{ loop_data.loop_ipv4 }}
+{% endif %}
+{% endfor %}
+{% for bgp_vlaue, bgp_data in l3_bgp_neighbors.items() %}
+{% if bgp_data.bgp_vrf == "AZCP21-OUT" %}
+    neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
+    remote-as {{ bgp_data.remote_asn }}
+    address-family ipv4 unicast
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
+    {% endif %}
+{% endif %}
+{% endfor %}

@@ -1,0 +1,124 @@
+---
+hostname: dc11_vp03
+local_bgp_asn: 64854
+azure_bgp_asn: 10000
+colo_loopback0: 1.1.1.1
+#configure loopback for each vrf
+loopback_interfaces:
+  loopback677:
+    loop_ipv4: 10.137.68.19
+    loop_vrf: AZCP21
+    description: "AZCP21 loopback interface"
+  loopback676:
+    loop_ipv4: 10.137.68.21
+    loop_vrf: AZCQ21
+    description: "AZCP21 loopback interface"
+  loopback675:
+    loop_ipv4: 10.137.68.20
+    loop_vrf: AZCD21
+    description: "AZCP21 loopback interface"
+# configure layer 3 interfaces
+layer_interfaces:
+  GigabitEthernet1:
+    status: "no shut"
+    description: "description connection to azure expressconnect"
+  GigabitEthernet2:
+    status: "no shut"
+    description: "description connection to colo switch NCCNBCLSW1"  
+  GigabitEthernet3:
+    status: "no shut"
+    description: "description connection to colo switch NCCBCLSW2"
+sub_interfaces:
+  GigabitEthernet1.677:
+    description: "<insert description here>"
+    vrf: AZCP21
+    dot1q: 677
+    ipv4_add: "<add azure ip address>"
+  GigabitEthernet1.676:
+    description: "<insert description here>"
+    vrf: AZCQ21
+    dot1q: 676
+    ipv4_add: "<add azure ip address>"
+  GigabitEthernet1.675:
+    description: "<insert description here>"
+    vrf: AZCD21
+    dot1q: 675
+    ipv4_add: "<add azure ip address>"
+  GigabitEthernet2.677:
+    description: "<connection to NCCNBCLSW1 EX/Y>"
+    vrf: AZCP21
+    dot1q: 677
+    ipv4_add: 10.137.64.46
+  GigabitEthernet2.676:
+    description: "<connection to NCCNBCLSW1 EX/Y>"
+    vrf: AZCQ21
+    dot1q: 676
+    ipv4_add: 10.137.64.174
+  GigabitEthernet2.675:
+    description: "<connection to NCCNBCLSW1 EX/Y>"
+    vrf: AZCD21
+    dot1q: 675
+    ipv4_add: 10.137.64.110
+  GigabitEthernet3.677:
+    description: "<connection to NCCNBCLSW2 EX/Y>"
+    vrf: AZCP21
+    dot1q: 677
+    ipv4_add: 10.137.64.50
+  GigabitEthernet3.676:
+    description: "<connection to NCCNBCLSW2 EX/Y>"
+    vrf: AZCQ21
+    dot1q: 676
+    ipv4_add: 10.137.64.178
+  GigabitEthernet3.675:
+    description: "<connection to NCCNBCLSW2 EX/Y>"
+    vrf: AZCD21
+    dot1q: 675
+    ipv4_add: 10.137.64.114
+
+router_bgp:
+  azcp21_peer1:
+    remote_bgp_ipv4_address: 1.2.3.1
+    description: "BGP to Azure Expressroute"
+    remote_bgp_asn: "<AZURE BGP ASN>"
+    vrf: AZCP21
+  acp21_peer2:
+    remote_bgp_ipv4_address: 10.137.64.45
+    description: "BGP to Colo Switch NCCNBCLSW1"
+    remote_bgp_asn: 64919
+    vrf: AZCP21
+  azcp21_peer3:
+    remote_bgp_ipv4_address: 10.137.64.49
+    description: "BGP to Colo Switch NCCNBCLSW2"
+    remote_bgp_asn: 64919
+    vrf: AZCP21
+  azcq21_peer1:
+    remote_bgp_ipv4_address: 1.2.3.4
+    description: "BGP to Azure Expressroute"
+    remote_bgp_asn: "<AZURE BGP ASN>"
+    vrf: AZCQ21
+  azcq21_peer2:
+    remote_bgp_ipv4_address: 10.137.64.173
+    description: "BGP to Colo Switch NCCNBCLSW1"
+    remote_bgp_asn: 64919
+    vrf: AZCQ21
+  azcq21_peer3:
+    remote_bgp_ipv4_address: 10.137.64.177
+    description: "BGP to Colo Switch NCCNBCLSW2"
+    remote_bgp_asn: 64919
+    vrf: AZCQ21
+  azdt21_peer1:
+    remote_bgp_ipv4_address: 1.2.3.7
+    description: "BGP to Azure Expressroute"
+    remote_bgp_asn: "<AZURE BGP ASN>"
+    vrf: AZCD21
+  azdt21_peer2:
+    remote_bgp_ipv4_address: 10.137.64.109
+    description: "BGP to Colo Switch NCCNBCLSW1"
+    remote_bgp_asn: 64919
+    vrf: AZCD21
+  azdt21_peer3:
+    remote_bgp_ipv4_address: 10.137.64.113
+    description: "BGP to Colo Switch NCCNBCLSW2"
+    remote_bgp_asn: 64919
+    vrf: AZCD21
+  

@@ -1,0 +1,269 @@
+---
+local_bgp_asn: 64919
+colo_vp03_04_asn: 64854
+colo_vp_01_02_asn: 65188
+local_vpc_peer_ipv4: 10.137.64.253
+remote_vpc_peer_ipv4: 10.138.64.254
+loopback0: 10.137.68.25/32
+loopback_interfaces:
+  loop675:
+    loop_ipv4: 10.137.68.2/32
+    loop_description: " vrf AZCD21 loopback for testing"
+    loop_vrf: AZCD21
+  loop676:
+    loop_ipv4: 10.137.68.3/32
+    loop_description: " vrf AZCQ21 loopback for testing"
+    loop_vrf: AZCQ21
+  loop677:
+    loop_ipv4: 10.137.68.1/32
+    loop_description: " vrf AZCP21 loopback for testing"
+    loop_vrf: AZCP21
+  loop175:
+    loop_ipv4: 10.137.68.33/32
+    loop_description: " vrf AZCD21-OUT loopback for testing"
+    loop_vrf: AZCD21-OUT 
+  loop176:
+    loop_ipv4: 10.137.68.34/32
+    loop_description: " vrf AZCQ21-OUT loopback for testing"
+    loop_vrf: AZCQ21-OUT 
+  loop177:
+    loop_ipv4: 10.137.68.35/32
+    loop_description: " vrf AZCP21-OUT loopback for testing"
+    loop_vrf: AZCP21-OUT 
+vlan_interfaces:
+  vlan_675:
+    vlan_id: 675
+    vlan_ipv4: 10.137.64.125/30
+    vlan_description: "ibgp vlan for vrf AZCD21"
+    vrf: AZCD21
+  vlan_676:
+    vlan_id: 676
+    vlan_ipv4: 10.137.64.189/30
+    vlan_description: "ibgp vlan for vrf AZCQ21"
+    vrf: AZCQ21
+  vlan_677:
+    vlan_id: 677
+    vlan_ipv4: 10.137.64.61/30
+    vlan_description: "ibgp vlan for vrf AZCP21"
+    vrf: AZCP21
+  vlan_1675:
+    vlan_id: 1675
+    vlan_ipv4: 10.137.64.241/30
+    vlan_description: "ibgp vlan for vrf AZCD21-OUT"
+    vrf: AZCD21-OUT 
+  vlan_1676:
+    vlan_id: 1676
+    vlan_ipv4: 10.137.64.245/30
+    vlan_description: "ibgp vlan for vrf AZCQ21-OUT"
+    vrf: AZCQ21-OUT
+  vlan_1677:
+    vlan_id: 1677
+    vlan_ipv4: 10.137.64.249/30
+    vlan_description: "ibgp vlan for vrf AZCP21-OUT"
+    vrf: AZCP21-OUT
+vpc_interfaces:
+  Ethernet1:
+    vpc_int_id: 1/1
+    vpc_portchannel_id: 1
+  Ethernet2:
+    vpc_int_id: 1/2
+    vpc_portchannel_id: 1
+l3_interfaces:
+  ethernet1/4:
+    description: " l3 connection to VP03"
+  ethernet1/5:
+    description: " l3 connection to VP04"
+  ethernet1/6:
+    description: " l3 connection to AVI-WAN"
+  ethernet1/7:
+    description: " l3 connection to AVI-LAN"
+  ethernet1/8:
+    description: " l3 connection to VP01"
+  ethernet1/9:
+    description: " l3 connection to VP02"
+l3_sub_interfaces:
+  ethernet1/4.675:
+    l3_sub_int_vrf: AZCD21-OUT
+    l3_sub_int_ipv4: 10.137.64.109/30
+    l3_sub_int_dot1q: 675
+  ethernet1/4.676:
+    l3_sub_int_vrf: AZCQ21-OUT
+    l3_sub_int_ipv4: 10.137.64.173/30
+    l3_sub_int_dot1q: 676
+  ethernet1/4.677:
+    l3_sub_int_vrf: AZCP21-OUT
+    l3_sub_int_ipv4: 10.137.64.45/30
+    l3_sub_int_dot1q: 677
+  ethernet1/5.675:
+    l3_sub_int_vrf: AZCD21-OUT
+    l3_sub_int_ipv4: 10.137.64.117/30
+    l3_sub_int_dot1q: 675
+  ethernet1/5.676:
+    l3_sub_int_vrf: AZCQ21-OUT
+    l3_sub_int_ipv4: 10.137.64.181/30
+    l3_sub_int_dot1q: 676
+  ethernet1/5.677:
+    l3_sub_int_vrf: AZCP21-OUT
+    l3_sub_int_ipv4: 10.137.64.53/30
+    l3_sub_int_dot1q: 677
+  ethernet1/7.675:
+    l3_sub_int_vrf: AZCD21
+    l3_sub_int_ipv4: 10.137.66.1/30
+    l3_sub_int_dot1q: 675
+  ethernet1/7.676:
+    l3_sub_int_vrf: AZCQ21
+    l3_sub_int_ipv4: 10.137.66.9/30
+    l3_sub_int_dot1q: 676
+  ethernet1/7.677:
+    l3_sub_int_vrf: AZCP21
+    l3_sub_int_ipv4: 10.137.66.17/30
+    l3_sub_int_dot1q: 677
+  ethernet1/8.675:
+    l3_sub_int_vrf: AZCD21
+    l3_sub_int_ipv4: 10.137.64.74/30
+    l3_sub_int_dot1q: 675
+  ethernet1/8.676:
+    l3_sub_int_vrf: AZCQ21
+    l3_sub_int_ipv4: 10.137.64.138/30
+    l3_sub_int_dot1q: 676
+  ethernet1/8.677:
+    l3_sub_int_vrf: AZCP21
+    l3_sub_int_ipv4: 10.137.64.10/30
+    l3_sub_int_dot1q: 677
+  ethernet1/9.675:
+    l3_sub_int_vrf: AZCD21
+    l3_sub_int_ipv4: 10.137.64.82/30
+    l3_sub_int_dot1q: 675
+  ethernet1/9.676:
+    l3_sub_int_vrf: AZCQ21
+    l3_sub_int_ipv4: 10.137.64.146/30
+    l3_sub_int_dot1q: 676
+  ethernet1/9.677:
+    l3_sub_int_vrf: AZCP21
+    l3_sub_int_ipv4: 10.137.64.18/30
+    l3_sub_int_dot1q: 677
+  ethernet1/6.675:
+    l3_sub_int_vrf: AZCD21-OUT
+    l3_sub_int_ipv4: 10.137.66.5/30
+    l3_sub_int_dot1q: 675
+  ethernet1/6.676:
+    l3_sub_int_vrf: AZCQ21-OUT
+    l3_sub_int_ipv4: 10.137.66.13/30
+    l3_sub_int_dot1q: 676
+  ethernet1/6.677:
+    l3_sub_int_vrf: AZCP21-OUT
+    l3_sub_int_ipv4: 10.137.66.21/30
+    l3_sub_int_dot1q: 677
+l3_bgp_neighbors:
+  sw02_peer1:
+    bgp_type: ibgp
+    remote_asn: 64919
+    remote_bgp_peer_ipv4: 10.137.64.62
+    bgp_vrf: AZCP21  
+  sw02_peer2:
+    bgp_type: ibgp
+    remote_asn: 64919
+    remote_bgp_peer_ipv4: 10.137.64.190
+    bgp_vrf: AZCQ21
+  sw02_peer3:
+    bgp_type: ibgp
+    remote_asn: 64919
+    remote_bgp_peer_ipv4: 10.137.64.126
+    bgp_vrf: AZCD21
+  sw02_peer4:
+    bgp_type: ibgp
+    remote_asn: 64919
+    remote_bgp_peer_ipv4: 10.137.64.246 
+    bgp_vrf: AZCD21-OUT
+  sw02_peer5:
+    bgp_type: ibgp
+    remote_asn: 64919
+    remote_bgp_peer_ipv4: 10.137.64.250
+    bgp_vrf: AZCQ21-OUT
+  sw02_peer6:
+    bgp_type: ibgp
+    remote_asn: 64919
+    remote_bgp_peer_ipv4: 10.137.64.242
+    bgp_vrf: AZCP21-OUT
+  vp03_peer1:
+    bgp_type: ebgp
+    remote_asn: 64854
+    remote_bgp_peer_ipv4: 10.137.64.46 
+    bgp_vrf: AZCP21-OUT
+  vp03_peer2: 
+    bgp_type: ebgp
+    remote_asn: 64854
+    remote_bgp_peer_ipv4: 10.137.64.110
+    bgp_vrf: AZCD21-OUT
+  vp03_peer3:
+    bgp_type: ebgp
+    remote_asn: 64854
+    remote_bgp_peer_ipv4: 10.137.64.174
+    bgp_vrf: AZCQ21-OUT
+  vp04_peer1:
+    bgp_type: ebgp
+    remote_asn: 64854
+    remote_bgp_peer_ipv4: 10.137.64.54
+    bgp_vrf: AZCP21-OUT
+  vp04_peer2:
+    bgp_type: ebgp
+    remote_asn: 64854
+    remote_bgp_peer_ipv4: 10.137.64.118
+    bgp_vrf: AZCD21-OUT
+  vp04_peer3:
+    bgp_type: ebgp
+    remote_asn: 64854
+    remote_bgp_peer_ipv4: 10.137.64.182
+    bgp_vrf: AZCQ21-OUT
+  vp01_peer1:
+    bgp_type: ebgp
+    remote_asn: 65188
+    remote_bgp_peer_ipv4: 10.137.64.9 
+    bgp_vrf: AZCP21
+  vp01_peer2:
+    bgp_type: ebgp
+    remote_asn: 65188
+    remote_bgp_peer_ipv4: 10.137.64.73
+    bgp_vrf: AZCD21 
+  vp01_peer3:
+    bgp_type: ebgp
+    remote_asn: 65188
+    remote_bgp_peer_ipv4: 10.137.64.137
+    bgp_vrf: AZCQ21 
+  vp02_peer1:
+    bgp_type: ebgp
+    remote_asn: 65188
+    remote_bgp_peer_ipv4: 10.137.64.17
+    bgp_vrf: AZCP21 
+  vp02_peer2:
+    bgp_type: ebgp
+    remote_asn: 65188
+    remote_bgp_peer_ipv4: 10.137.64.81
+    bgp_vrf: AZCD21 
+  vp02_peer3:
+    bgp_type: ebgp
+    remote_asn: 65188
+    remote_bgp_peer_ipv4: 10.137.64.145
+    bgp_vrf: AZCQ21
+  av1_peer1:
+    bgp_type: ebgp
+    remote_asn: 64523
+    remote_bgp_peer_ipv4: 10.137.66.2
+    bgp_vrf: AZCD21
+  av1_peer2:
+    bgp_type: ebgp
+    remote_asn: 64522
+    remote_bgp_peer_ipv4: 10.137.66.10
+    bgp_vrf: AZCQ21 
+  av1_peer3:
+    bgp_type: ebgp
+    remote_asn: 64521
+    remote_bgp_peer_ipv4: 10.137.66.18
+    bgp_vrf: AZCP21
+redis_connected:
+  ethernet1/6.675:
+    vrf: AZCD21-OUT
+  ethernet1/6.676:
+    vrf: AZCQ21-OUT
+  ethernet1/6.677:
+    vrf: AZCP21-OUT
