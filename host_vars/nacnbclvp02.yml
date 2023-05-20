@@ -1,5 +1,5 @@
 ---
-  hostname: dc11_vp02
+  hostname: nacnbclvp02
   loopback0: 10.137.68.28
   local_bgp_asn: 65188
 # define vrfs
@@ -24,18 +24,24 @@
       vrf_dot1q: 1677
 #  define l3 interface 
   l3_interfaces:
-    GigabitEthernet1:
-      description: "connection to xyz"
-    GigabitEthernet2:
-      description: "connection to xyz"
-    GigabitEthernet3:
-      description: "connection to xyz"  
-    GigabitEthernet4:
-      description: "connection to xyz"
-    GigabitEthernet5:
-      description: "connection to xyz"
-    GigabitEthernet6:
-      description: "connection to xyz"
+    Te0/0/0:
+      description: "connection to nacnbclvp02 Te0/0/0"
+      lacp: present
+    Te0/0/1:
+      description: "connection to nacnbclvp02 Te0/0/1"
+      lacp: present
+    T0/0/3:
+      description: "connection to nacnbclsw02 E1/47"
+      lacp: absent
+    Te0/0/2:
+      description: "connection to nacnbclsw01 E1/47"
+      lacp: absent
+    Te0/0/11:
+      description: "connection to ncdznbclvp02 Te0/0/11"
+      lacp: absent
+    Te0/0/10:
+      description: "connection to ntdzbclvp02 Te0/0/10"
+      lacp: absent
 # define loopback interface 
   loopback_interfaces:
     loop675:
@@ -51,81 +57,81 @@
       loop_ipv4: 10.137.68.10
       loop_description: "vrf azcp21 loopback interface"
   layer3_sub_int:
-    GigabitEthernet2.675:
+    Te0/0/3.675:
       dot1q: 675
       ipv4_add: 10.137.64.85
       vrf : AZCD21
-      description:
-    GigabitEthernet2.676:
+      description: " L3 connnection to nacnbclsw02 E1/47.675"
+    Te0/0/3.676:
       dot1q: 676
       ipv4_add: 10.137.64.149
       vrf : AZCQ21
-      description:
-    GigabitEthernet2.677:
+      description: " L3 connnection to nacnbclsw02 E1/47.676"
+    Te0/0/3.677:
       dot1q: 677
       ipv4_add: 10.137.64.21
       vrf : AZCP21
-      description: 
-    GigabitEthernet1.675:
+      description: " L3 connnection to nacnbclsw02 E1/47.677"
+    Po1.675:
       dot1q: 675
       ipv4_add: 10.137.64.90
       vrf : AZCD21
-      description:
-    GigabitEthernet1.676:
+      description: " L3 connnection to nacnbclvp01 Po1.675"
+    Po1.676:
       dot1q: 676
       ipv4_add: 10.137.64.154
       vrf : AZCQ21
-      description:
-    GigabitEthernet1.677:
+      description: " L3 connnection to nacnbclvp01 Po1.676"
+    Po1.677:
       dot1q: 677
       ipv4_add: 10.137.64.26
       vrf : AZCP21
-      description:
-    GigabitEthernet3.675:
+      description: " L3 connnection to nacnbclvp01 Po1.677"
+    Te0/0/2.675:
       dot1q: 675
       ipv4_add: 10.137.64.81
       vrf : AZCD21
-      description:
-    GigabitEthernet3.676:
+      description: " L3 connnection to nacnbclsw01 E1/47.675"
+    Te0/0/2.676:
       dot1q: 676
       ipv4_add: 10.137.64.145
       vrf : AZCQ21
-      description:
-    GigabitEthernet3.677:
+      description: " L3 connnection to nacnbclsw01 E1/47.676"
+    Te0/0/2.677:
       dot1q: 677
       ipv4_add: 10.137.64.17
       vrf : AZCP21
-      description:
-    GigabitEthernet4.675:
+      description: " L3 connnection to nacnbclsw01 E1/47.677"
+    Te0/0/11.675:
       dot1q: 675
       ipv4_add: 10.137.64.213
       vrf : AZCD21-FVRF
-      description:
-    GigabitEthernet4.676:
+      description: " L3 connnection to ncdzbclvp02 Te0/0/11.675"
+    Te0/0/11.676:
       dot1q: 676
       ipv4_add: 10.137.64.229
       vrf : AZCQ21-FVRF
-      description:
-    GigabitEthernet4.677:
+      description: " L3 connnection to ncdzbclvp02 Te0/0/11.676"
+    Te0/0/11.677:
       dot1q: 677
       ipv4_add: 10.137.64.5
       vrf : AZCP21-FVRF
-      description:
-    GigabitEthernet5.675:
+      description: " L3 connnection to ncdzbclvp02 Te0/0/11.677"
+    Te0/0/10.675:
       dot1q: 675
       ipv4_add: 10.137.64.221 
       vrf : AZCD21-FVRF
-      description:
-    GigabitEthernet5.676:
+      description: " L3 connnection to ntdzbclvp02 Te0/0/10.675"
+    Te0/0/10.676:
       dot1q: 676
       ipv4_add: 10.137.64.237
       vrf : AZCQ21-FVRF
-      description:
-    GigabitEthernet5.677:
+      description: " L3 connnection to ntdzbclvp02 Te0/0/10.676"
+    Te0/0/10.677:
       dot1q: 677
       ipv4_add: 10.137.64.205
       vrf : AZCP21-FVRF
-      description:
+      description: " L3 connnection to ntdzbclvp02 Te0/0/10.677"
   vti_tunnel_interfaces:
     tunnel675:
       vrf: AZCD21

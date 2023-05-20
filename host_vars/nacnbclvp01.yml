@@ -106,32 +106,32 @@
       dot1q: 675
       ipv4_add: 10.137.64.209
       vrf : AZCD21-FVRF
-      description: " L3 connnection to ncdzbclvp02 Te0/0/11.675"
+      description: " L3 connnection to ncdzbclvp01 Te0/0/11.675"
     Te0/0/11.676:
       dot1q: 676
       ipv4_add: 10.137.64.225
       vrf : AZCQ21-FVRF
-      description: " L3 connnection to ncdzbclvp02 Te0/0/11.676"
+      description: " L3 connnection to ncdzbclvp01 Te0/0/11.676"
     Te0/0/11.677:
       dot1q: 677
       ipv4_add: 10.137.64.1
       vrf : AZCP21-FVRF
-      description: " L3 connnection to ncdzbclvp02 Te0/0/11.677"
+      description: " L3 connnection to ncdzbclvp01 Te0/0/11.677"
     Te0/0/10.675:
       dot1q: 675
       ipv4_add: 10.137.64.217 
       vrf : AZCD21-FVRF
-      description: " L3 connnection to ntdzbclvp02 Te0/0/10.675"
+      description: " L3 connnection to ntdzbclvp01 Te0/0/10.675"
     Te0/0/10.676:
       dot1q: 676
       ipv4_add: 10.137.64.233
       vrf : AZCQ21-FVRF
-      description: " L3 connnection to ntdzbclvp02 Te0/0/10.676"
+      description: " L3 connnection to ntdzbclvp01 Te0/0/10.676"
     Te0/0/10.677:
       dot1q: 677
       ipv4_add: 10.136.64.201
       vrf : AZCP21-FVRF
-      description: " L3 connnection to ntdzbclvp02 Te0/0/10.677"
+      description: " L3 connnection to ntdzbclvp01 Te0/0/10.677"
   vti_tunnel_interfaces:
     tunnel675:
       vrf: AZCD21
