@@ -22,12 +22,21 @@ interface {{ loop_name }}
   description {{ loop_intf.description }}
   vrf forwarding {{ loop_intf.loop_vrf }}
   ip address {{ loop_intf.loop_ipv4 }} 255.255.255.255
+!
 {% endfor %}
+!
+{# port-channel config for LACP to Azure #}
+interface port-channel1
+description port-channel to Azure
+ no shut
 !
 {% for intf in layer_interfaces %}
 interface {{ intf }}
   {{ layer_interfaces[intf].description }}
   {{ layer_interfaces[intf].status }}
+{% if layer_interfaces[intf].lacp == "present" %} channel-group 1
+{% endif %}
+!
 {% endfor %}
 !
 {% for sub_int_name, sub_int_data in sub_interfaces.items() %}
@@ -36,6 +45,7 @@ interface {{ intf }}
     encapsulation dot1q {{ sub_int_data.dot1q }}
     vrf forwarding {{ sub_int_data.vrf }}
     ip address {{ sub_int_data.ipv4_add }} 255.255.255.252
+  !
 {% endfor %}
 {# This section prints out BGP config #}
 router bgp {{ local_bgp_asn }}
@@ -53,6 +63,7 @@ address-family ipv4 vrf AZCP21
   neighbor {{ bgp_data.remote_bgp_ipv4_address }} activate
 {% endif %}
 {% endfor %}
+!
 address-family ipv4 vrf AZCQ21
 {% for loop_name, loop_intf in loopback_interfaces.items() %}
 {% if loop_intf.loop_vrf == "AZCQ21" %}
@@ -65,6 +76,7 @@ address-family ipv4 vrf AZCQ21
   neighbor {{ bgp_data.remote_bgp_ipv4_address }} activate
 {% endif %}
 {% endfor %}
+!
 address-family ipv4 vrf AZCD21
 {% for loop_name, loop_intf in loopback_interfaces.items() %}
 {% if loop_intf.loop_vrf == "AZCD21" %}
@@ -77,3 +89,4 @@ address-family ipv4 vrf AZCD21
   neighbor {{ bgp_data.remote_bgp_ipv4_address }} activate
 {% endif %}
 {% endfor %}
+!

@@ -63,24 +63,24 @@ vlan_interfaces:
     vrf: AZCP21-OUT
 vpc_interfaces:
   Ethernet1:
-    vpc_int_id: 1/1
+    vpc_int_id: 1/53
     vpc_portchannel_id: 1
   Ethernet2:
-    vpc_int_id: 1/2
+    vpc_int_id: 1/54
     vpc_portchannel_id: 1
 l3_interfaces:
-  ethernet1/4:
-    description: " l3 connection to VP04"
-  ethernet1/5:
-    description: " l3 connection to VP03"
-  ethernet1/6:
-    description: " l3 connection to AVI-WAN"
-  ethernet1/7:
-    description: " l3 connection to AVI-LAN"
+  ethernet1/45:
+    description: " l3 connection to NACNBLVP04"
+  ethernet1/56:
+    description: " l3 connection to NACNBLVP03"
+  ethernet1/1:
+    description: " l3 connection to PROD AVI-WAN"
+  ethernet1/2:
+    description: " l3 connection to PROD AVI-LAN"
   ethernet1/8:
     description: " l3 connection to VP02"
   ethernet1/9:
-    description: " l3 connection to VP03"
+    description: " l3 connection to VP01"
 l3_sub_interfaces:
   ethernet1/4.675:
     l3_sub_int_vrf: AZCD21-OUT

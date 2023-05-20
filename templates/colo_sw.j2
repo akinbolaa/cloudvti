@@ -57,13 +57,13 @@ interface port-channel1
  switchport mode trunk
  vpc peer-link
 !
-{# interface for vpc peer keepalive #}
+{# interface for vpc peer keepalive
 interface ethernet1/3
 no shutdown
 no switchport
 vrf member vpc_keepalive
 ip add {{ local_vpc_peer_ipv4 }}/30
-
+#}
 vpc domain 100
  peer-keepalive destination {{ remote_vpc_peer_ipv4 }} source {{ local_vpc_peer_ipv4 }} vrf vpc_keepalive
 !
@@ -78,27 +78,31 @@ interface {{ l3_int_value }}
 {% for l3_sub_int_value, l3_sub_int_data in l3_sub_interfaces.items() %}
 interface {{ l3_sub_int_value }}
   no shutdown
+  description {{ l3_sub_int_data.l3_sub_description }}
   encapsulation dot1q {{ l3_sub_int_data.l3_sub_int_dot1q }}
   vrf member {{ l3_sub_int_data.l3_sub_int_vrf }}
   ip address {{ l3_sub_int_data.l3_sub_int_ipv4 }}
 !
 {% endfor %} 
 {# generate route-map for redistribution#}
-route-map REDIS_CONNECTED-VRF-AZCT21-OUT permit 10
+route-map REDIS_CONNECTED-VRF-AZCD21-OUT permit 10
 {% for redis_name, int_name in redis_connected.items() %}
 {% if int_name.vrf == "AZCD21-OUT" %} match interface {{ redis_name }}
 {% endif %}
 {% endfor %}
-route-map REDIS_CONNECTED-VRF-AZCT21-OUT permit 10
+!
+route-map REDIS_CONNECTED-VRF-AZCQ21-OUT permit 10
 {% for redis_name, int_name in redis_connected.items() %}
 {% if int_name.vrf == "AZCQ21-OUT" %} match interface {{ redis_name }}
 {% endif %}
 {% endfor %}
-route-map REDIS_CONNECTED-VRF-AZCT21-OUT permit 10
+!
+route-map REDIS_CONNECTED-VRF-AZCP21-OUT permit 10
 {% for redis_name, int_name in redis_connected.items() %}
 {% if int_name.vrf == "AZCP21-OUT" %} match interface {{ redis_name }}
 {% endif %}
 {% endfor %}
+!
 {# bgp definition #}
 router bgp {{ local_bgp_asn }}
   address-family ipv4 unicast
@@ -115,8 +119,8 @@ network {{ loop_data.loop_ipv4 }}
     neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
     remote-as {{ bgp_data.remote_asn }}
     address-family ipv4 unicast
-    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
-    {% endif %}
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self 
+{% endif %}
 {% endif %}
 {% endfor %}
 !
@@ -133,8 +137,8 @@ network {{ loop_data.loop_ipv4 }}
     neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
     remote-as {{ bgp_data.remote_asn }}
     address-family ipv4 unicast
-    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
-    {% endif %}
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self 
+{% endif %}
 {% endif %}
 {% endfor %}
 !
@@ -151,8 +155,8 @@ network {{ loop_data.loop_ipv4 }}
     neighbor {{ bgp_data.remote_bgp_peer_ipv4 }}
     remote-as {{ bgp_data.remote_asn }}
     address-family ipv4 unicast
-    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
-    {% endif %}
+    {% if bgp_data.bgp_type == "ibgp" %} next-hop-self 
+{% endif %}
 {% endif %}
 {% endfor %}
 !
@@ -189,7 +193,7 @@ network {{ loop_data.loop_ipv4 }}
     remote-as {{ bgp_data.remote_asn }}
     address-family ipv4 unicast
     {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
-    {% endif %}
+{% endif %}
 {% endif %}
 {% endfor %}
 !
@@ -208,6 +212,6 @@ network {{ loop_data.loop_ipv4 }}
     remote-as {{ bgp_data.remote_asn }}
     address-family ipv4 unicast
     {% if bgp_data.bgp_type == "ibgp" %} next-hop-self
-    {% endif %}
+{% endif %}
 {% endif %}
 {% endfor %}

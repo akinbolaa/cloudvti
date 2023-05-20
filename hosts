@@ -1,15 +1,13 @@
 [cloud_rtr]
-dc11_vp03
-dc11_vp04
-da3_vp03
-da3_vp04
+nacnbclvp03
+nacnbclvp04
 
 
 [colo_devcies]
-dc11_vp01
-dc11_vp02
-dc11_sw01
-dc11_sw02
+nacnbclvp01
+nacnbclvp02
+nacnbclsw01
+nacnbclsw02
 da3_vp01
 da3_vp02
 da3_sw01

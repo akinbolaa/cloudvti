@@ -1,6 +1,6 @@
 ---
 # cloud demarc routers vp03 and vp04 config generation
-  - hosts: dc11_vp04
+  - hosts: cloud_rtr
     connection: local
     tasks:
      - name: Generate config for cloud routers

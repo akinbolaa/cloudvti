@@ -63,97 +63,149 @@ vlan_interfaces:
     vrf: AZCP21-OUT
 vpc_interfaces:
   Ethernet1:
-    vpc_int_id: 1/1
+    vpc_int_id: 1/53
     vpc_portchannel_id: 1
   Ethernet2:
-    vpc_int_id: 1/2
+    vpc_int_id: 1/54
     vpc_portchannel_id: 1
 l3_interfaces:
+  ethernet1/46:
+    description: " l3 connection to NACNBLVP03"
+  ethernet1/45:
+    description: " l3 connection to NACNBLVP04"
+  ethernet1/1:
+    description: " l3 connection to PROD AVI-WAN"
+  ethernet1/2:
+    description: " l3 connection to PROD AVI-LAN"
+  ethernet1/48:
+    description: " l3 connection to NACNBLVP01"
+  ethernet1/47:
+    description: " l3 connection to NACNBLVP02"
+  ethernet1/3:
+    description: " l3 connection to PRE-PROD AVI-WAN"
   ethernet1/4:
-    description: " l3 connection to VP03"
-  ethernet1/5:
-    description: " l3 connection to VP04"
-  ethernet1/6:
-    description: " l3 connection to AVI-WAN"
-  ethernet1/7:
-    description: " l3 connection to AVI-LAN"
-  ethernet1/8:
-    description: " l3 connection to VP01"
-  ethernet1/9:
-    description: " l3 connection to VP02"
+    description: " l3 connection to PRE-PROD AVI-LAN"
 l3_sub_interfaces:
-  ethernet1/4.675:
+  ethernet1/46.675:
     l3_sub_int_vrf: AZCD21-OUT
     l3_sub_int_ipv4: 10.137.64.109/30
     l3_sub_int_dot1q: 675
-  ethernet1/4.676:
+    l3_sub_description: "L3 sub-interface connection to NACNBLVP03 VRF AZCD21-OUT"
+  ethernet1/46.676:
     l3_sub_int_vrf: AZCQ21-OUT
     l3_sub_int_ipv4: 10.137.64.173/30
     l3_sub_int_dot1q: 676
-  ethernet1/4.677:
+    l3_sub_description: "L3 sub-interface connection to NACNBLVP03 VRF AZCQ21-OUT"
+  ethernet1/46.677:
     l3_sub_int_vrf: AZCP21-OUT
     l3_sub_int_ipv4: 10.137.64.45/30
     l3_sub_int_dot1q: 677
-  ethernet1/5.675:
+    l3_sub_description: "L3 sub-interface connection to NACNBLVP03 VRF AZCP21-OUT"
+  ethernet1/45.675:
     l3_sub_int_vrf: AZCD21-OUT
     l3_sub_int_ipv4: 10.137.64.117/30
     l3_sub_int_dot1q: 675
-  ethernet1/5.676:
+    l3_sub_description: "L3 sub-interface connection to NACNBLVP04 VRF AZCD21-OUT"
+  ethernet1/45.676:
     l3_sub_int_vrf: AZCQ21-OUT
     l3_sub_int_ipv4: 10.137.64.181/30
     l3_sub_int_dot1q: 676
-  ethernet1/5.677:
+    l3_sub_description: "L3 sub-interface connection to NACNBLVP04 VRF AZCQ21-OUT"
+  ethernet1/45.677:
     l3_sub_int_vrf: AZCP21-OUT
     l3_sub_int_ipv4: 10.137.64.53/30
     l3_sub_int_dot1q: 677
-  ethernet1/7.675:
+    l3_sub_description: "L3 sub-interface connection to NACNBLVP04 VRF AZCP21-OUT"
+  ethernet1/2.675:
     l3_sub_int_vrf: AZCD21
     l3_sub_int_ipv4: 10.137.66.1/30
     l3_sub_int_dot1q: 675
-  ethernet1/7.676:
+    l3_sub_description: "L3 sub-interface connection to AVI PROD LAN VRF AZCD21"
+  ethernet1/2.676:
     l3_sub_int_vrf: AZCQ21
     l3_sub_int_ipv4: 10.137.66.9/30
     l3_sub_int_dot1q: 676
-  ethernet1/7.677:
+    l3_sub_description: "L3 sub-interface connection to AVI PROD LAN VRF AZCQ21"
+  ethernet1/2.677:
     l3_sub_int_vrf: AZCP21
     l3_sub_int_ipv4: 10.137.66.17/30
     l3_sub_int_dot1q: 677
-  ethernet1/8.675:
+    l3_sub_description: "L3 sub-interface connection to AVI PROD LAN VRF AZCP21"
+  ethernet1/48.675:
     l3_sub_int_vrf: AZCD21
     l3_sub_int_ipv4: 10.137.64.74/30
     l3_sub_int_dot1q: 675
-  ethernet1/8.676:
+    l3_sub_description: "L3 sub-interface connection to NACNBCLVP01 VRF AZCD21"
+  ethernet1/48.676:
     l3_sub_int_vrf: AZCQ21
     l3_sub_int_ipv4: 10.137.64.138/30
     l3_sub_int_dot1q: 676
-  ethernet1/8.677:
+    l3_sub_description: "L3 sub-interface connection to NACNBCLVP01 VRF AZCQ21"
+  ethernet1/48.677:
     l3_sub_int_vrf: AZCP21
     l3_sub_int_ipv4: 10.137.64.10/30
     l3_sub_int_dot1q: 677
-  ethernet1/9.675:
+    l3_sub_description: "L3 sub-interface connection to NACNBCLVP01 VRF AZCP21"
+  ethernet1/47.675:
     l3_sub_int_vrf: AZCD21
     l3_sub_int_ipv4: 10.137.64.82/30
     l3_sub_int_dot1q: 675
-  ethernet1/9.676:
+    l3_sub_description: "L3 sub-interface connection to NACNBCLVP01 VRF AZCP21"
+  ethernet1/47.676:
     l3_sub_int_vrf: AZCQ21
     l3_sub_int_ipv4: 10.137.64.146/30
     l3_sub_int_dot1q: 676
-  ethernet1/9.677:
+    l3_sub_description: "L3 sub-interface connection to NACNBCLVP02 VRF AZCQ21"
+  ethernet1/47.677:
     l3_sub_int_vrf: AZCP21
     l3_sub_int_ipv4: 10.137.64.18/30
     l3_sub_int_dot1q: 677
-  ethernet1/6.675:
+    l3_sub_description: "L3 sub-interface connection to NACNBCLVP02 VRF AZCP21"
+  ethernet1/11.675:
     l3_sub_int_vrf: AZCD21-OUT
     l3_sub_int_ipv4: 10.137.66.5/30
     l3_sub_int_dot1q: 675
-  ethernet1/6.676:
+    l3_sub_description: "L3 sub-interface connection to AVI PROD WAN VRF AZCD21-OUT"
+  ethernet1/11.676:
     l3_sub_int_vrf: AZCQ21-OUT
     l3_sub_int_ipv4: 10.137.66.13/30
     l3_sub_int_dot1q: 676
-  ethernet1/6.677:
+    l3_sub_description: "L3 sub-interface connection to AVI PROD WAN VRF AZCQ21-OUT"
+  ethernet1/11.677:
     l3_sub_int_vrf: AZCP21-OUT
     l3_sub_int_ipv4: 10.137.66.21/30
     l3_sub_int_dot1q: 677
+    l3_sub_description: "L3 sub-interface connection to AVI PROD WAN VRF AZCP21-OUT"
+  ethernet1/3.675:
+    l3_sub_int_vrf: AZCD21-OUT
+    l3_sub_int_ipv4: 10.137.66.57/30
+    l3_sub_int_dot1q: 675
+    l3_sub_description: "L3 sub-interface connection to AVI PREPROD WAN VRF AZCD21-OUT"
+  ethernet1/3.676:
+    l3_sub_int_vrf: AZCQ21-OUT
+    l3_sub_int_ipv4: 10.137.66.65/30
+    l3_sub_int_dot1q: 676
+    l3_sub_description: "L3 sub-interface connection to AVI PREPROD WAN VRF AZCQ21-OUT"
+  ethernet1/3.677:
+    l3_sub_int_vrf: AZCP21-OUT
+    l3_sub_int_ipv4: 10.137.66.73/30
+    l3_sub_int_dot1q: 677
+    l3_sub_description: "L3 sub-interface connection to AVI PREPROD WAN VRF AZCP21-OUT"
+  ethernet1/4.675:
+    l3_sub_int_vrf: AZCD21
+    l3_sub_int_ipv4: 10.137.66.53/30
+    l3_sub_int_dot1q: 675
+    l3_sub_description: "L3 sub-interface connection to AVI PREPROD LAN VRF AZCD21-OUT"
+  ethernet1/4.676:
+    l3_sub_int_vrf: AZCQ21
+    l3_sub_int_ipv4: 10.137.66.61/30
+    l3_sub_int_dot1q: 676
+    l3_sub_description: "L3 sub-interface connection to AVI PREPROD LAN VRF AZCQ21-OUT"
+  ethernet1/4.677:
+    l3_sub_int_vrf: AZCP21
+    l3_sub_int_ipv4: 10.137.66.69/30
+    l3_sub_int_dot1q: 677
+    l3_sub_description: "L3 sub-interface connection to AVI PREPROD LAN VRF AZCP21-OUT"
 l3_bgp_neighbors:
   sw02_peer1:
     bgp_type: ibgp
@@ -245,25 +297,46 @@ l3_bgp_neighbors:
     remote_asn: 65188
     remote_bgp_peer_ipv4: 10.137.64.145
     bgp_vrf: AZCQ21
-  av1_peer1:
+  aviprod_peer1:
     bgp_type: ebgp
     remote_asn: 64523
     remote_bgp_peer_ipv4: 10.137.66.2
     bgp_vrf: AZCD21
-  av1_peer2:
+  aviprod_peer2:
     bgp_type: ebgp
     remote_asn: 64522
     remote_bgp_peer_ipv4: 10.137.66.10
     bgp_vrf: AZCQ21 
-  av1_peer3:
+  aviprod_peer3:
     bgp_type: ebgp
     remote_asn: 64521
     remote_bgp_peer_ipv4: 10.137.66.18
     bgp_vrf: AZCP21
+  avipre_prod_peer1:
+    bgp_type: ebgp
+    remote_asn: 64523
+    remote_bgp_peer_ipv4: 10.137.66.54
+    bgp_vrf: AZCD21
+  avipre_prod_peer2:
+    bgp_type: ebgp
+    remote_asn: 64522
+    remote_bgp_peer_ipv4: 10.137.66.62
+    bgp_vrf: AZCQ21 
+  avipre_prod_peer3:
+    bgp_type: ebgp
+    remote_asn: 64521
+    remote_bgp_peer_ipv4: 10.137.66.70
+    bgp_vrf: AZCP21
 redis_connected:
-  ethernet1/6.675:
+  ethernet1/11.675:
     vrf: AZCD21-OUT
-  ethernet1/6.676:
+  ethernet1/11.676:
     vrf: AZCQ21-OUT
-  ethernet1/6.677:
+  ethernet1/11.677:
+    vrf: AZCP21-OUT
+  ethernet1/3.675:
+    vrf: AZCD21-OUT
+  ethernet1/3.676:
+    vrf: AZCQ21-OUT
+  ethernet1/3.677:
     vrf: AZCP21-OUT
