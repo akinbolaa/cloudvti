@@ -13,9 +13,17 @@ rd {{ local_bgp_asn}}:{{ vrf_value.vrf_dot1q }}
 address-family ipv4 
 !
 {% endfor %}
+!
+{# port-channel config for LACP between vp01/02 #}
+interface port-channel1
+description port-channel between vp01-vp02
+ no shut
+!
 {# create l3 interfaces #}
 {% for l3_int_name, l3_int_value in l3_interfaces.items() %}
 interface {{ l3_int_name }}
+{% if l3_int_value.lacp == "present" %} channel-group 1
+{% endif %}
 no shut
 description {{ l3_int_value.description }}
 !
