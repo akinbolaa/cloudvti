@@ -165,14 +165,17 @@ l3_sub_interfaces:
     l3_sub_int_vrf: AZCD21-OUT
     l3_sub_int_ipv4: 10.137.66.105/30
     l3_sub_int_dot1q: 675
+    l3_sub_description: "L3 sub-interface connection to AVI PROD WAN VRF AZCD21-OUT"
   ethernet1/1.676:
     l3_sub_int_vrf: AZCQ21-OUT
     l3_sub_int_ipv4: 10.137.66.113/30
     l3_sub_int_dot1q: 676
+    l3_sub_description: "L3 sub-interface connection to AVI PROD WAN VRF AZCQ21-OUT"
   ethernet1/1.677:
     l3_sub_int_vrf: AZCP21-OUT
     l3_sub_int_ipv4: 10.137.66.121/30
     l3_sub_int_dot1q: 677
+    l3_sub_description: "L3 sub-interface connection to AVI PROD WAN VRF AZCP21-OUT"
   ethernet1/3.675:
     l3_sub_int_vrf: AZCD21-OUT
     l3_sub_int_ipv4: 10.137.66.157/30
