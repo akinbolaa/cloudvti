@@ -297,32 +297,32 @@ l3_bgp_neighbors:
   av1prod_peer1:
     bgp_type: ebgp
     remote_asn: 64523
-    remote_bgp_peer_ipv4: 10.137.66.106
+    remote_bgp_peer_ipv4: 10.137.66.101
     bgp_vrf: AZCD21
   av1prod_peer2:
     bgp_type: ebgp
     remote_asn: 64522
-    remote_bgp_peer_ipv4: 10.137.66.114
+    remote_bgp_peer_ipv4: 10.137.66.110
     bgp_vrf: AZCQ21 
   av1prod_peer3:
     bgp_type: ebgp
     remote_asn: 64521
-    remote_bgp_peer_ipv4: 10.137.66.122
+    remote_bgp_peer_ipv4: 10.137.66.118
     bgp_vrf: AZCP21
   avipre_prod_peer1:
     bgp_type: ebgp
     remote_asn: 64523
-    remote_bgp_peer_ipv4: 10.137.66.158
+    remote_bgp_peer_ipv4: 10.137.66.154
     bgp_vrf: AZCD21
   avipre_prod_peer2:
     bgp_type: ebgp
     remote_asn: 64522
-    remote_bgp_peer_ipv4: 10.137.66.166
+    remote_bgp_peer_ipv4: 10.137.66.162
     bgp_vrf: AZCQ21 
   avipre_prod_peer3:
     bgp_type: ebgp
     remote_asn: 64521
-    remote_bgp_peer_ipv4: 10.137.66.174
+    remote_bgp_peer_ipv4: 10.137.66.170 
     bgp_vrf: AZCP21
 redis_connected:
   ethernet1/1.675:
