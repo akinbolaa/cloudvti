@@ -61,8 +61,8 @@ crypto ikev2 keyring PH2_KEYR_DC
 {% for vti_int, vti_tunnel in vti_tunnel_interfaces.items() %}
  peer peer_{{ vti_tunnel.dest }}
   address {{ vti_tunnel.dest }}
-  pre-shared-key local Akinbola
-  pre-shared-key remote Akinbola
+  pre-shared-key local AZURECLOUD2ONPREM
+  pre-shared-key remote AZURECLOUD2ONPREM
 !
  {% endfor %}
 !
