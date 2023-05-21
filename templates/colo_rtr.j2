@@ -15,9 +15,9 @@ address-family ipv4
 {% endfor %}
 {# create l3 interfaces #}
 {% for l3_int_name, l3_int_value in l3_interfaces.items() %}
+description {{ l3_int_value.description }}
 interface {{ l3_int_name }}
 no shut
-description {{ l3_int_value.description }}
 !
 {% endfor %}
 

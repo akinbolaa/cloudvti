@@ -1,5 +1,5 @@
 ---
-  hostname: ncd_vp02
+  hostname: ncdzbclvp02
   loopback0: 10.137.68.32
   local_bgp_asn: 12345
 # define vrfs
@@ -24,12 +24,12 @@
       vrf_dot1q: 1677
 #  define l3 interface 
   l3_interfaces:
-    GigabitEthernet1:
-      description: "connection to xyz"
-    GigabitEthernet2:
-      description: "connection to xyz"
-    GigabitEthernet4:
-      description: "connection to xyz"
+    Te0/0/11:
+      description: "connection to nacnbclvp02 Te0/0/11"
+      lacp: absent
+    Te0/0/10:
+      description: "connection to ndcnbclvp02 Te0/0/10"
+      lacp: absent
 # define loopback interface 
   loopback_interfaces:
     loop675:
@@ -45,51 +45,36 @@
       loop_ipv4: 10.137.68.13
       loop_description: "vrf azcp21 loopback interface"
   layer3_sub_int:
-    GigabitEthernet2.675:
-      dot1q: 675
-      ipv4_add: 10.137.64.74
-      vrf : AZCD21
-      description:
-    GigabitEthernet2.676:
-      dot1q: 676
-      ipv4_add: 10.137.64.138
-      vrf : AZCQ21
-      description:
-    GigabitEthernet2.677:
-      dot1q: 677
-      ipv4_add: 10.137.64.10
-      vrf : AZCP21
-      description: 
-    GigabitEthernet1.675:
+    Te0/0/11.675:
       dot1q: 675
       ipv4_add: 10.137.64.214
       vrf : AZCD21-FVRF
-      description:
-    GigabitEthernet1.676:
+      description: "connection to nacnbclvp02 Te0/0/11.675"
+    Te0/0/11.676:
       dot1q: 676
       ipv4_add: 10.137.64.230
       vrf : AZCQ21-FVRF
-      description:
-    GigabitEthernet1.677:
+      description: "connection to nacnbclvp02 Te0/0/11.676"
+    Te0/0/11.677:
       dot1q: 677
       ipv4_add: 10.137.64.6
       vrf : AZCP21-FVRF
-      description:
-    GigabitEthernet4.675:
+      description: "connection to nacnbclvp02 Te0/0/11.677"
+    Te0/0/10.675:
       dot1q: 675
       ipv4_add: 10.137.80.222 
       vrf : AZCD21-FVRF
-      description:
-    GigabitEthernet4.676:
+      description: "connection to ncdzbclvp02 Te0/0/10.675"
+    Te0/0/10.676:
       dot1q: 676
       ipv4_add: 10.137.80.238
       vrf : AZCQ21-FVRF
-      description:
-    GigabitEthernet4.677:
+      description: "connection to ncdzbclvp02 Te0/0/10.676"
+    Te0/0/10.677:
       dot1q: 677
       ipv4_add: 10.136.80.206
       vrf : AZCP21-FVRF
-      description:
+      description: "connection to ncdzbclvp02 Te0/0/10.677"
   vti_tunnel_interfaces:
     tunnel675:
       vrf: AZCD21
@@ -149,37 +134,22 @@
       remote_ipv4: 10.137.64.33
       bgp_type: ebgp
       bgp_vrf: AZCP21
-    da3_vp02peer1:
+    ntd_vp02peer1:
       remote_asn: 65206
       remote_ipv4: 10.137.80.105
       bgp_type: ebgp
       bgp_vrf: AZCD21
-    da3_vp02peer2:
+    ntd_vp02peer2:
       remote_asn: 65206
       remote_ipv4: 10.137.80.169
       bgp_type: ebgp
       bgp_vrf: AZCQ21 
-    da3_vp02peer3:
+    ntd_vp02peer3:
       remote_asn: 65206
       remote_ipv4: 10.137.80.41
       bgp_type: ebgp
       bgp_vrf: AZCP21
-    ncd_vp02peer1:
-      remote_asn: 12345
-      remote_ipv4: 10.137.64.73
-      bgp_type: ibgp
-      bgp_vrf: AZCD21
-    ncd_vp02peer2:
-      remote_asn: 12345
-      remote_ipv4: 10.137.64.137
-      bgp_type: ibgp
-      bgp_vrf: AZCQ21 
-    ncd_vp02peer3:
-      remote_asn: 12345
-      remote_ipv4: 10.137.64.9
-      bgp_type: ibgp
-      bgp_vrf: AZCP21
   ikev2_policy:
-      fvrf1: AZCD21-FVRF
-      fvrf2: AZCQ21-FVRF
-      fvrf3: AZCP21-FVRF
+    fvrf1: AZCD21-FVRF
+    fvrf2: AZCQ21-FVRF
+    fvrf3: AZCP21-FVRF
