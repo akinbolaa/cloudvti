@@ -1,0 +1,257 @@
+---
+  hostname: nacnbclvp01
+  loopback0: 10.137.68.27 
+  local_bgp_asn: 65188
+# define vrfs
+  vrf_definition:
+    vrf_azcd21:
+      vrf_name: AZCD21
+      vrf_dot1q: 675
+    vrf_azcq21:
+      vrf_name: AZCQ21
+      vrf_dot1q: 676
+    vrf_azcp21:
+      vrf_name: AZCP21
+      vrf_dot1q: 677
+    vrf_azcd21-fvrf:
+      vrf_name: AZCD21-FVRF
+      vrf_dot1q: 1675
+    vrf_azcq21-fvrf:
+      vrf_name: AZCQ21-FVRF
+      vrf_dot1q: 1676
+    vrf_azcp21-fvrf:
+      vrf_name: AZCP21-FVRF
+      vrf_dot1q: 1677
+#  define l3 interface 
+  l3_interfaces:
+    Te0/0/0:
+      description: "connection to nacnbclvp02 Te0/0/0"
+      lacp: present
+    Te0/0/1:
+      description: "connection to nacnbclvp02 Te0/0/1"
+      lacp: present
+    Te0/0/2:
+      description: "connection to nacnbclsw01 E1/48"
+      lacp: absent
+    Te0/0/3:
+      description: "connection to nacnbclsw02 E1/48"  
+      lacp: absent
+    Te0/0/11:
+      description: "connection to ncdznbclvp01 Te0/0/11"
+      lacp: absent
+    Te0/0/10:
+      description: "connection to ntdzbclvp01 Te0/0/10"
+      lacp: absent
+# define loopback interface 
+  loopback_interfaces:
+    loop675:
+      loop_vrf: AZCD21
+      loop_ipv4: 10.137.68.8
+      loop_description: "vrf azcp21 loopback interface"
+    loop676:
+      loop_vrf: AZCQ21
+      loop_ipv4: 10.137.68.9
+      loop_description: "vrf azcp21 loopback interface"
+    loop677:
+      loop_vrf: AZCP21
+      loop_ipv4: 10.137.68.7
+      loop_description: "vrf azcp21 loopback interface"
+  layer3_sub_int:
+    Te0/0/2.675:
+      dot1q: 675
+      ipv4_add: 10.137.64.73
+      vrf : AZCD21
+      description: " L3 connnection to nacnbclsw01 E1/48.675"
+    Te0/0/2.676:
+      dot1q: 676
+      ipv4_add: 10.137.64.137
+      vrf : AZCQ21
+      description: " L3 connnection to nacnbclsw01 E1/48.676"
+    Te0/0/2.677:
+      dot1q: 677
+      ipv4_add: 10.137.64.9
+      vrf : AZCP21
+      description: " L3 connnection to nacnbclsw01 E1/48.677"
+    Po1.675:
+      dot1q: 675
+      ipv4_add: 10.137.64.89
+      vrf : AZCD21
+      description: " L3 connnection to nacnbclvp02 Po1.675"
+    Po1.676:
+      dot1q: 676
+      ipv4_add: 10.137.64.153
+      vrf : AZCQ21
+      description: " L3 connnection to nacnbclvp02 Po1.675"
+    Po1.677:
+      dot1q: 677
+      ipv4_add: 10.137.64.25
+      vrf : AZCP21
+      description: " L3 connnection to nacnbclvp02 Po1.675"
+    Te0/0/3.675:
+      dot1q: 675
+      ipv4_add: 10.137.64.77
+      vrf : AZCD21
+      description: " L3 connnection to nacnbclsw02 E1/48.676"
+    Te0/0/3.676:
+      dot1q: 676
+      ipv4_add: 10.137.64.141
+      vrf : AZCQ21
+      description: " L3 connnection to nacnbclsw02 E1/48.676"
+    Te0/0/3.677:
+      dot1q: 677
+      ipv4_add: 10.137.64.13
+      vrf : AZCP21
+      description: " L3 connnection to nacnbclsw02 E1/48.676"
+    Te0/0/11.675:
+      dot1q: 675
+      ipv4_add: 10.137.64.209
+      vrf : AZCD21-FVRF
+      description: " L3 connnection to ncdzbclvp01 Te0/0/11.675"
+    Te0/0/11.676:
+      dot1q: 676
+      ipv4_add: 10.137.64.225
+      vrf : AZCQ21-FVRF
+      description: " L3 connnection to ncdzbclvp01 Te0/0/11.676"
+    Te0/0/11.677:
+      dot1q: 677
+      ipv4_add: 10.137.64.1
+      vrf : AZCP21-FVRF
+      description: " L3 connnection to ncdzbclvp01 Te0/0/11.677"
+    Te0/0/10.675:
+      dot1q: 675
+      ipv4_add: 10.137.64.217 
+      vrf : AZCD21-FVRF
+      description: " L3 connnection to ntdzbclvp01 Te0/0/10.675"
+    Te0/0/10.676:
+      dot1q: 676
+      ipv4_add: 10.137.64.233
+      vrf : AZCQ21-FVRF
+      description: " L3 connnection to ntdzbclvp01 Te0/0/10.676"
+    Te0/0/10.677:
+      dot1q: 677
+      ipv4_add: 10.136.64.201
+      vrf : AZCP21-FVRF
+      description: " L3 connnection to ntdzbclvp01 Te0/0/10.677"
+  vti_tunnel_interfaces:
+    tunnel675:
+      vrf: AZCD21
+      ipv4: 10.137.64.93
+      src: 10.137.64.209
+      dest: 10.137.64.210
+      desc: 
+      fvrf: AZCD21-FVRF 
+    tunnel676:
+      vrf: AZCQ21
+      ipv4: 10.137.64.157
+      src: 10.137.64.225
+      dest: 10.137.64.226
+      desc: 
+      fvrf: AZCQ21-FVRF
+    tunnel677:
+      vrf: AZCP21
+      ipv4: 10.137.64.29 
+      src: 10.137.64.1
+      dest: 10.137.64.2
+      desc: 
+      fvrf: AZCP21-FVRF
+    tunnel1675:
+      vrf: AZCD21
+      ipv4: 10.137.64.101
+      src: 10.137.64.217
+      dest: 10.137.64.218
+      desc: 
+      fvrf: AZCD21-FVRF
+    tunnel1676:
+      vrf: AZCQ21
+      ipv4: 10.137.64.165 
+      src: 10.137.64.233
+      dest: 10.137.64.234
+      desc: 
+      fvrf: AZCQ21-FVRF
+    tunnel1677:
+      vrf: AZCP21
+      ipv4: 10.137.64.37
+      src: 10.137.64.201
+      dest: 10.137.64.202
+      desc: 
+      fvrf: AZCP21-FVRF
+  bgp_neighbors:
+    sw01peer1:
+      remote_asn: 64919
+      remote_ipv4: 10.137.64.74
+      bgp_type: ebgp
+      bgp_vrf: AZCD21
+    sw01peer2:
+      remote_asn: 64919
+      remote_ipv4: 10.137.64.138
+      bgp_type: ebgp
+      bgp_vrf: AZCQ21 
+    sw01peer3:
+      remote_asn: 64919
+      remote_ipv4: 10.137.64.10
+      bgp_type: ebgp
+      bgp_vrf: AZCP21
+    sw02peer1:
+      remote_asn: 64919
+      remote_ipv4: 10.137.64.78
+      bgp_type: ebgp
+      bgp_vrf: AZCD21
+    sw02peer2:
+      remote_asn: 64919
+      remote_ipv4: 10.137.64.142
+      bgp_type: ebgp
+      bgp_vrf: AZCQ21 
+    sw02peer3:
+      remote_asn: 64919
+      remote_ipv4: 10.137.64.14
+      bgp_type: ebgp
+      bgp_vrf: AZCP21
+    colo_vp02peer1:
+      remote_asn: 65188
+      remote_ipv4: 10.137.64.90
+      bgp_type: ibgp
+      bgp_vrf: AZCD21
+    colo_vp02peer2:
+      remote_asn: 65188
+      remote_ipv4: 10.137.64.154
+      bgp_type: ibgp
+      bgp_vrf: AZCQ21 
+    colo_vp02peer3:
+      remote_asn: 65188
+      remote_ipv4: 10.137.64.26
+      bgp_type: ibgp
+      bgp_vrf: AZCP21
+    ncd_vp01peer1:
+      remote_asn: 64805
+      remote_ipv4: 10.137.64.94
+      bgp_type: ebgp
+      bgp_vrf: AZCD21
+    ncd_vp01peer2:
+      remote_asn: 64805
+      remote_ipv4: 10.137.64.158
+      bgp_type: ebgp
+      bgp_vrf: AZCQ21 
+    ncd_vp01peer3:
+      remote_asn: 64805
+      remote_ipv4: 10.137.64.30
+      bgp_type: ebgp
+      bgp_vrf: AZCP21
+    ntd_vp01peer1:
+      remote_asn: 64526
+      remote_ipv4: 10.137.64.102
+      bgp_type: ebgp
+      bgp_vrf: AZCD21
+    ntd_vp01peer2:
+      remote_asn: 64526
+      remote_ipv4: 10.137.64.166
+      bgp_type: ebgp
+      bgp_vrf: AZCQ21 
+    ntd_vp01peer3:
+      remote_asn: 64526
+      remote_ipv4: 10.137.64.38
+      bgp_type: ebgp
+      bgp_vrf: AZCP21
+  ikev2_policy:
+      fvrf1: AZCD21-FVRF
+      fvrf2: AZCQ21-FVRF
+      fvrf3: AZCP21-FVRF

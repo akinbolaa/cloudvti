@@ -1,0 +1,130 @@
+---
+local_bgp_asn: 65189
+hostname: ndcnbclvp04
+azure_bgp_asn: 10000
+colo_loopback0: 10.137.84.30
+#configure loopback for each vrf
+loopback_interfaces:
+  loopback677:
+    loop_ipv4: 10.137.84.22
+    loop_vrf: AZCP21
+    description: "AZCP21 loopback interface"
+  loopback676:
+    loop_ipv4: 10.137.84.23
+    loop_vrf: AZCQ21
+    description: "AZCP21 loopback interface"
+  loopback675:
+    loop_ipv4: 10.137.84.21
+    loop_vrf: AZCD21
+    description: "AZCP21 loopback interface"
+# configure layer 3 interfaces
+layer_interfaces:
+  Te0/0/10:
+    status: "no shut"
+    description: "description connection to azure expressconnect"
+    lacp: present
+  Te0/0/11:
+    status: "no shut"
+    description: "description connection to azure expressconnect"
+    lacp: present
+  Te0/0/2:
+    status: "no shut"
+    description: "description connection to colo switch NACNBCLSW01 E1/45"  
+    lacp: absent
+  Te0/0/3:
+    status: "no shut"
+    description: "description connection to colo switch NACNBCLSW02 E1/45"
+    lacp: absent
+sub_interfaces:
+  Po1.677:
+    description: "<insert description here>"
+    vrf: AZCP21
+    dot1q: 677
+    ipv4_add: "<add azure ip address>"
+  Po1.676:
+    description: "<insert description here>"
+    vrf: AZCQ21
+    dot1q: 676
+    ipv4_add: "<add azure ip address>"
+  Po1.675:
+    description: "<insert description here>"
+    vrf: AZCD21
+    dot1q: 675
+    ipv4_add: "<add azure ip address>"
+  Te0/0/2.677:
+    description: "connection to NDCNBCLSW01 E1/45 VRF AZCP21"
+    vrf: AZCP21
+    dot1q: 677
+    ipv4_add: 10.137.80.54
+  Te0/0/2.676:
+    description: "connection to NDCNBCLSW01 E1/45 VRF AZCQ21"
+    vrf: AZCQ21
+    dot1q: 676
+    ipv4_add: 10.137.80.182
+  Te0/0/2.675:
+    description: "connection to NDCNBCLSW01 E1/45 VRF AZCD21"
+    vrf: AZCD21
+    dot1q: 675
+    ipv4_add: 10.137.80.118
+  Te0/0/3.677:
+    description: "<connection to NDCNBCLSW02 E1/45 VRF AZCP21"
+    vrf: AZCP21
+    dot1q: 677
+    ipv4_add: 10.137.80.58
+  Te0/0/3.676:
+    description: "<connection to NDCNBCLSW02 E1/45 VRF AZCQ21"
+    vrf: AZCQ21
+    dot1q: 676
+    ipv4_add: 10.137.80.186
+  Te0/0/3.675:
+    description: "<connection to NDCNBCLSW02 E1/45 VRF AZCQ21"
+    vrf: AZCD21
+    dot1q: 675
+    ipv4_add: 10.137.80.122
+
+router_bgp:
+  azure_peer1:
+    remote_bgp_ipv4_address: 1.2.3.1
+    description: "BGP to Azure Expressroute VRF AZCP21"
+    remote_bgp_asn: "<AZURE BGP ASN>"
+    vrf: AZCP21
+  azure_peer2:
+    remote_bgp_ipv4_address: 1.2.3.4
+    description: "BGP to Azure Expressroute VRF AZCD21"
+    remote_bgp_asn: "<AZURE BGP ASN"
+    vrf: AZCD21
+  azure_peer3:
+    remote_bgp_ipv4_address: 1.2.3.4
+    description: "BGP to Azure Expressroute VRF AZCQ21"
+    remote_bgp_asn: "<AZURE BGP ASN"
+    vrf: AZCQ21
+  sw01_peer1:
+    remote_bgp_ipv4_address: 10.137.80.53
+    description: BGP to Colo Switch NDCNBCLSW01 VRF AZCP21"
+    remote_bgp_asn: 665190
+    vrf: AZCP21
+  sw01_peer2:
+    remote_bgp_ipv4_address: 10.137.80.117
+    description: BGP to Colo Switch NDCNBCLSW01 VRF AZCD21"
+    remote_bgp_asn: 65190
+    vrf: AZCD21
+  sw01_peer3:
+    remote_bgp_ipv4_address: 10.137.80.181
+    description: BGP to Colo Switch NDCNBCLSW01 VRF AZCQ21"
+    remote_bgp_asn: 65190
+    vrf: AZCQ21
+  sw02_peer1:
+    remote_bgp_ipv4_address: 10.137.80.57
+    description: "BGP to Colo Switch NDCNBCLSW02 VRF AZCP21"
+    remote_bgp_asn: 65190
+    vrf: AZCP21
+  sw02_peer2:
+    remote_bgp_ipv4_address: 10.137.80.121
+    description: "BGP to Colo Switch NDCNBCLSW02 VRF AZCD21"
+    remote_bgp_asn: 65190
+    vrf: AZCD21
+  sw02_peer3:
+    remote_bgp_ipv4_address: 10.137.80.185
+    description: "BGP to Colo Switch NDCNBCLSW02 VRF AZCQ21"
+    remote_bgp_asn: 65190
+    vrf: AZCQ21
