@@ -222,32 +222,32 @@
       bgp_type: ibgp
       bgp_vrf: AZCP21
     ncd_vp01peer1:
-      remote_asn: 12345
+      remote_asn: 64805
       remote_ipv4: 10.137.64.94
       bgp_type: ebgp
       bgp_vrf: AZCD21
     ncd_vp01peer2:
-      remote_asn: 12345
+      remote_asn: 64805
       remote_ipv4: 10.137.64.158
       bgp_type: ebgp
       bgp_vrf: AZCQ21 
     ncd_vp01peer3:
-      remote_asn: 12345
+      remote_asn: 64805
       remote_ipv4: 10.137.64.30
       bgp_type: ebgp
       bgp_vrf: AZCP21
     ntd_vp01peer1:
-      remote_asn: 12346
+      remote_asn: 64526
       remote_ipv4: 10.137.64.102
       bgp_type: ebgp
       bgp_vrf: AZCD21
     ntd_vp01peer2:
-      remote_asn: 12346
+      remote_asn: 64526
       remote_ipv4: 10.137.64.166
       bgp_type: ebgp
       bgp_vrf: AZCQ21 
     ntd_vp01peer3:
-      remote_asn: 12346
+      remote_asn: 64526
       remote_ipv4: 10.137.64.38
       bgp_type: ebgp
       bgp_vrf: AZCP21

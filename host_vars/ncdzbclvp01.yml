@@ -1,7 +1,7 @@
 ---
   hostname: ncdzbclvp01
   loopback0: 10.137.68.31
-  local_bgp_asn: 12345
+  local_bgp_asn: 64805
 # define vrfs
   vrf_definition:
     vrf_azcd21:
