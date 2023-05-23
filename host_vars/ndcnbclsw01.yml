@@ -2,8 +2,8 @@
 local_bgp_asn: 65190
 colo_vp03_04_asn: 65189
 colo_vp_01_02_asn: 65206
-local_vpc_peer_ipv4: 10.137.64.253
-remote_vpc_peer_ipv4: 10.138.64.254
+local_vpc_peer_ipv4: 10.137.80.253
+remote_vpc_peer_ipv4: 10.137.80.254
 loopback0: 10.137.84.25/32
 loopback_interfaces:
   loop675:
@@ -209,12 +209,12 @@ l3_sub_interfaces:
 l3_bgp_neighbors:
   sw02_peer1:
     bgp_type: ibgp
-    remote_asn: 64919
+    remote_asn: 65190
     remote_bgp_peer_ipv4: 10.137.80.62
     bgp_vrf: AZCP21  
   sw02_peer2:
     bgp_type: ibgp
-    remote_asn: 64919
+    remote_asn: 65190
     remote_bgp_peer_ipv4: 10.137.80.190
     bgp_vrf: AZCQ21
   sw02_peer3:
