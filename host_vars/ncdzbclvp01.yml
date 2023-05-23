@@ -72,7 +72,7 @@
       description: "connection to ndcnbclvp01 Te0/0/10.676"
     Te0/0/10.677:
       dot1q: 677
-      ipv4_add: 10.136.80.202
+      ipv4_add: 10.137.80.202
       vrf : AZCP21-FVRF
       description: "connection to ndcnbclvp01 Te0/0/10.677"
   vti_tunnel_interfaces:
