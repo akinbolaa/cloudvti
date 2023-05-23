@@ -4,15 +4,17 @@ nacnbclvp04
 ndcnbclvp03
 ndcnbclvp04
 
-[colo_devcies]
-nacnbclvp01
-nacnbclvp02
+[colo_switches]
 nacnbclsw01
 nacnbclsw02
-da3_vp01
-da3_vp02
-da3_sw01
-da3_sw02
+ndcnbclsw01
+ndcnbclsw02
+
+[colo_routers]
+nacnbclvp01
+nacnbclvp02
+ndcnbclvp01
+ndcnbclvp02
 
 [dc_rtr]
 ncdzbclvp01
