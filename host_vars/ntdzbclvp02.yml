@@ -1,7 +1,7 @@
 ---
   hostname: ncdzbclvp02
-  loopback0: 10.137.68.32
-  local_bgp_asn: 64805
+  loopback0: 10.137.84.32
+  local_bgp_asn: 64526
 # define vrfs
   vrf_definition:
     vrf_azcd21:
@@ -34,32 +34,32 @@
   loopback_interfaces:
     loop675:
       loop_vrf: AZCD21
-      loop_ipv4: 10.137.68.14
+      loop_ipv4: 10.137.84.14
       loop_description: "vrf azcp21 loopback interface"
     loop676:
       loop_vrf: AZCQ21
-      loop_ipv4: 10.137.68.15
+      loop_ipv4: 10.137.84.15
       loop_description: "vrf azcp21 loopback interface"
     loop677:
       loop_vrf: AZCP21
-      loop_ipv4: 10.137.68.13
+      loop_ipv4: 10.137.84.13
       loop_description: "vrf azcp21 loopback interface"
   layer3_sub_int:
     Te0/0/11.675:
       dot1q: 675
-      ipv4_add: 10.137.64.214
+      ipv4_add: 10.137.80.214
       vrf : AZCD21-FVRF
-      description: "connection to nacnbclvp02 Te0/0/11.675"
+      description: "connection to ndcnbclvp02 Te0/0/11.675"
     Te0/0/11.676:
       dot1q: 676
-      ipv4_add: 10.137.64.230
+      ipv4_add: 10.137.80.230
       vrf : AZCQ21-FVRF
-      description: "connection to nacnbclvp02 Te0/0/11.676"
+      description: "connection to ndcnbclvp02 Te0/0/11.676"
     Te0/0/11.677:
       dot1q: 677
-      ipv4_add: 10.137.64.6
+      ipv4_add: 10.137.80.6
       vrf : AZCP21-FVRF
-      description: "connection to nacnbclvp02 Te0/0/11.677"
+      description: "connection to ndcnbclvp02 Te0/0/11.677"
     Te0/0/10.675:
       dot1q: 675
       ipv4_add: 10.137.80.222 
@@ -78,75 +78,75 @@
   vti_tunnel_interfaces:
     tunnel675:
       vrf: AZCD21
-      ipv4: 10.137.64.98
-      src: 10.137.64.214
-      dest: 10.137.64.213
+      ipv4: 10.137.80.98
+      src: 10.137.80.214
+      dest: 10.137.80.213
       desc: 
       fvrf: AZCD21-FVRF 
     tunnel676:
       vrf: AZCQ21
-      ipv4: 10.137.64.162 
-      src: 10.137.64.230
-      dest: 10.137.64.229
+      ipv4: 10.137.80.162 
+      src: 10.137.80.230
+      dest: 10.137.80.229
       desc: 
       fvrf: AZCQ21-FVRF
     tunnel677:
       vrf: AZCP21
-      ipv4: 10.137.64.34 
-      src: 10.137.64.6
-      dest: 10.137.64.5
+      ipv4: 10.137.80.34 
+      src: 10.137.80.6
+      dest: 10.137.80.5
       desc: 
       fvrf: AZCP21-FVRF
     tunnel1675:
       vrf: AZCD21
-      ipv4: 10.137.80.106
-      src: 10.137.80.222
-      dest: 10.137.80.221
+      ipv4: 10.137.64.106
+      src: 10.137.64.222
+      dest: 10.137.64.221
       desc: 
       fvrf: AZCD21-FVRF
     tunnel1676:
       vrf: AZCQ21
-      ipv4: 10.137.80.170 
-      src: 10.137.80.238
-      dest: 10.137.80.237
+      ipv4: 10.137.64.170 
+      src: 10.137.64.238
+      dest: 10.137.64.237
       desc: 
       fvrf: AZCQ21-FVRF
     tunnel1677:
       vrf: AZCP21
-      ipv4: 10.137.80.42
-      src: 10.137.80.206
-      dest: 10.137.80.205
+      ipv4: 10.137.64.42
+      src: 10.137.64.206
+      dest: 10.137.64.205
       desc: 
       fvrf: AZCP21-FVRF
   bgp_neighbors:
     dc11_colo_vp02peer1:
-      remote_asn: 65188
-      remote_ipv4: 10.137.64.97
+      remote_asn: 65206
+      remote_ipv4: 10.137.80.97
       bgp_type: ebgp
       bgp_vrf: AZCD21
     dc11_colo_vp02peer2:
-      remote_asn: 65188
-      remote_ipv4: 10.137.64.161
+      remote_asn: 65206
+      remote_ipv4: 10.137.80.161
       bgp_type: ebgp
       bgp_vrf: AZCQ21 
     dc11_colo_vp02peer3:
-      remote_asn: 65188
-      remote_ipv4: 10.137.64.33
+      remote_asn: 65206
+      remote_ipv4: 10.137.80.33
       bgp_type: ebgp
       bgp_vrf: AZCP21
     ntd_vp02peer1:
-      remote_asn: 65206
-      remote_ipv4: 10.137.80.105
+      remote_asn: 65188
+      remote_ipv4: 10.137.64.105
       bgp_type: ebgp
       bgp_vrf: AZCD21
     ntd_vp02peer2:
-      remote_asn: 65206
-      remote_ipv4: 10.137.80.169
+      remote_asn: 65188
+      remote_ipv4: 10.137.64.169
       bgp_type: ebgp
       bgp_vrf: AZCQ21 
     ntd_vp02peer3:
-      remote_asn: 65206
-      remote_ipv4: 10.137.80.41
+      remote_asn: 65188
+      remote_ipv4: 10.137.64.41
       bgp_type: ebgp
       bgp_vrf: AZCP21
   ikev2_policy:

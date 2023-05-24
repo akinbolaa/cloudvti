@@ -1,6 +1,6 @@
 ---
   hostname: ndcnbclvp01
-  loopback0: 10.137.82.27 
+  loopback0: 10.137.84.27 
   local_bgp_asn: 65206
 # define vrfs
   vrf_definition:
@@ -46,20 +46,20 @@
   loopback_interfaces:
     loop675:
       loop_vrf: AZCD21
-      loop_ipv4: 10.137.82.8
+      loop_ipv4: 10.137.84.8
       loop_description: "vrf azcp21 loopback interface"
     loop676:
       loop_vrf: AZCQ21
-      loop_ipv4: 10.137.82.9
+      loop_ipv4: 10.137.84.9
       loop_description: "vrf azcp21 loopback interface"
     loop677:
       loop_vrf: AZCP21
-      loop_ipv4: 10.137.82.7
+      loop_ipv4: 10.137.84.7
       loop_description: "vrf azcp21 loopback interface"
   layer3_sub_int:
     Te0/0/2.675:
       dot1q: 675
-      ipv4_add: 10.137.82.73
+      ipv4_add: 10.137.80.73
       vrf : AZCD21
       description: " L3 connnection to ndcnbclsw01 E1/48.675"
     Te0/0/2.676:
@@ -223,7 +223,7 @@
       bgp_vrf: AZCP21
     ncd_vp01peer1:
       remote_asn: 64805
-      remote_ipv4: 10.137.64.102
+      remote_ipv4: 10.137.80.102
       bgp_type: ebgp
       bgp_vrf: AZCD21
     ncd_vp01peer2:
