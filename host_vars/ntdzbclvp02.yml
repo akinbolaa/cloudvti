@@ -62,17 +62,17 @@
       description: "connection to ndcnbclvp02 Te0/0/11.677"
     Te0/0/10.675:
       dot1q: 675
-      ipv4_add: 10.137.80.222 
+      ipv4_add: 10.137.64.222 
       vrf : AZCD21-FVRF
       description: "connection to ncdzbclvp02 Te0/0/10.675"
     Te0/0/10.676:
       dot1q: 676
-      ipv4_add: 10.137.80.238
+      ipv4_add: 10.137.64.238
       vrf : AZCQ21-FVRF
       description: "connection to ncdzbclvp02 Te0/0/10.676"
     Te0/0/10.677:
       dot1q: 677
-      ipv4_add: 10.136.80.206
+      ipv4_add: 10.136.64.206
       vrf : AZCP21-FVRF
       description: "connection to ncdzbclvp02 Te0/0/10.677"
   vti_tunnel_interfaces:
