@@ -37,7 +37,7 @@ layer_interfaces:
     lacp: absent
 sub_interfaces:
   Po1.677:
-    description: "<insert description here>"
+    description: "<insert description here towards azure>"
     vrf: AZCP21
     dot1q: 677
     ipv4_add: "<add azure ip address towards azure>"
