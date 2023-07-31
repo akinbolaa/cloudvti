@@ -40,7 +40,7 @@ sub_interfaces:
     description: "<insert description here>"
     vrf: AZCP21
     dot1q: 677
-    ipv4_add: "<add azure ip address>"
+    ipv4_add: "<add azure ip address towards azure>"
   Po1.676:
     description: "<insert description here>"
     vrf: AZCQ21

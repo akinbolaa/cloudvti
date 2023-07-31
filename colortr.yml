@@ -1,5 +1,4 @@
 ---
-# cloud demarc routers vp03 and vp04 config generation
   - hosts: dc_rtr
     connection: local
     tasks:
